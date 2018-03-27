@@ -1,0 +1,11 @@
+{% macro main_nav(place='page-header') %}
+  <nav class="main-nav{% if place == 'page-header' %} main-nav--header{% elif place == 'page-footer' %} main-nav--footer{% endif %}">
+    <ul>
+      <li>Main nav</li>
+      <li><a href="/">Home</a></li>
+      {% if isDev %}
+        <li><a href="/test">Test</a></li>
+      {% endif %}
+    </ul>
+  </nav>
+{% endmacro %}

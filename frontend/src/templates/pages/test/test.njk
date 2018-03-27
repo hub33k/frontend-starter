@@ -1,0 +1,49 @@
+{% extends 'base.njk' %}
+
+
+{% block title %}Test | {{ super() }}{% endblock %}
+
+{% block page_footer %}{% endblock %}
+
+{% block page_content %}
+  <h1>Testing page - {{ global.title }}</h1>
+
+  <h2>Variables</h2>
+  <h3>global</h3>
+  <ul>
+    {% for name, item in global %}
+      <li>{{ name }} = {{ item }}</li>
+    {% endfor %}
+  </ul>
+
+  <h3>vars.data</h3>
+  <ul>
+    {% for name, item in vars.data %}
+      <li>{{ name }} = {{ item }}</li>
+    {% endfor %}
+  </ul>
+
+  <h2>Entries</h2>
+  <h3>Styles</h3>
+  <ul>
+    {% for chunk in htmlWebpackPlugin.options.heads %}
+      {% if '_styles' in chunk %}
+        <li>{{ chunk }} - {% if isDev %}{{ htmlWebpackPlugin.files.chunks[chunk].entry }}{% else %}{{ htmlWebpackPlugin.files.chunks[chunk].css }}{% endif %}</li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+
+  <h3>Scripts - head</h3>
+  <ul>
+    {% for chunk in htmlWebpackPlugin.options.heads %}
+      <li>{{ chunk }} - {{ htmlWebpackPlugin.files.chunks[chunk].entry }}</li>
+    {% endfor %}
+  </ul>
+
+  <h3>Scripts - body</h3>
+  <ul>
+    {% for chunk in htmlWebpackPlugin.options.bodys %}
+      <li>{{ chunk }} - {{ htmlWebpackPlugin.files.chunks[chunk].entry }}</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

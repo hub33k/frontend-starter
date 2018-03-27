@@ -1,0 +1,40 @@
+###########################################
+# Files
+
+webpack-stats.json
+
+###########################################
+# Folders
+
+bower_components
+node_modules
+coverage
+
+###########################################
+
+.venv
+.tmp
+CACHE
+dist
+notes
+
+###########################################
+# Trash files & dirs
+
+.sass-cache
+__pycache__
+*.py[co]
+*.DS_Store
+
+# Log files
+*.log
+
+# Editors and IDEs
+.*.swp
+.*.un~
+.idea
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
