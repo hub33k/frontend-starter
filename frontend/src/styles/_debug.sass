@@ -1,8 +1,12 @@
 /* debug.sass */
 
 @if $DEBUG
+  *
+    transition: all .2s ease-in-out
+
   body
     padding: 0 1rem
+    font-family: 'Roboto', sans-serif
 
     @if $DEVELOPMENT
       background: darkseagreen
@@ -15,7 +19,26 @@
     padding: 1rem
     border: 4px solid #999
     border-radius: 4px
-    background-color: #ccc
+    //background: #ccc url("#{$IMAGES_URL}/HTML5_Logo_512.png") no-repeat top right
+    background: #ccc url("#{$SVG_URL}/html5-logo.svg") no-repeat top right
+    background-size: auto 25%
+
+  .home main
+    display: grid
+    grid-template-columns: 1fr 1fr 1fr
+
+    > *
+      margin: auto
+
+  img,
+  svg
+    display: inline-block
+    max-width: 100%
+    height: auto
+
+  svg
+    &.html5-logo
+      width: 300px
 
 @if $PRODUCTION
   body

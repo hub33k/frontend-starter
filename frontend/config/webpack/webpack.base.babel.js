@@ -1,7 +1,9 @@
 import path from 'path';
-import webpack from 'webpack';
+
+import webpack from "webpack";
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import BundleTracker from 'webpack-bundle-tracker';
+
 import * as config from '../config';
 
 // Base config
@@ -20,10 +22,6 @@ const webpackBase = {
       path.resolve(config.SCRIPTS_DIR, 'init.js'),
     ],
     front_styles: [
-      // Vendor
-      // path.resolve(config.STYLES_DIR, 'vendor', 'foundation-sites/foundation-custom.scss'),
-
-      // Front
       path.resolve(config.STYLES_DIR, 'main.sass'),
     ],
     main: [
@@ -47,39 +45,48 @@ const webpackBase = {
         use: [{
           loader: 'babel-loader',
           options: {
+            compact: true,
             babelrc: true,
           },
         }],
       },
       {
-        test: /\.css$/,
+        test: /\.(html)$/,
         use: [
           {
-            loader: 'style-loader',
-            options: {
-              useable: true,
-            },
-          },
-          {
-            loader: 'css-loader',
+            loader: 'html-loader',
           }
-        ],
+        ]
       },
       // Nunjucks templates
       {
         test: /\.(njk)$/,
         use: [
           {
-            // https://github.com/SudoCat/Nunjucks-Isomorphic-Loader
             loader: 'nunjucks-isomorphic-loader',
             query: {
-              root: [path.resolve(config.TEMPLATES_DIR)]
+              root: [
+                config.TEMPLATES_DIR,
+              ]
             }
           }
         ]
       },
+      // Styles
       {
-        test: /\.(gif|png|jpe?g|svg)$/i,
+        test: /\.css$/,
+        use: [
+          {
+            loader: 'style-loader',
+          },
+          {
+            loader: 'css-loader',
+          }
+        ],
+      },
+      // Images
+      {
+        test: /\.(gif|png|jpe?g|svg)$/i, // |svg
         use: [
           {
             loader: 'url-loader',
@@ -89,7 +96,7 @@ const webpackBase = {
             }
           }
         ],
-      }
+      },
     ]
   },
   plugins: [
@@ -97,16 +104,6 @@ const webpackBase = {
       path: __dirname,
       filename: 'webpack-stats.json',
     }),
-    new webpack.optimize.CommonsChunkPlugin({
-      // minChunks: config.PRODUCTION ? 6 : Infinity,
-      // adds vendors to init.js file - from package.json -> dependencies
-      minChunks: (module) => {
-        return module.context && module.context.indexOf("node_modules") !== -1;
-      },
-      name: 'init',
-      filename: config.PRODUCTION ? 'init.[hash:10].js' : 'init.js',
-    }),
-    // index.html
     new HtmlWebpackPlugin({
       variables: {
         global: config.TEMPLATE_CONFIG.variables,
@@ -143,12 +140,11 @@ const webpackBase = {
       bodys: config.TEMPLATE_CONFIG.bodys,
       minify: config.TEMPLATE_CONFIG.minify,
     }),
-    // add PROD and DEV config to js scripts,
     new webpack.DefinePlugin({
       DEVELOPMENT: JSON.stringify(config.DEVELOPMENT),
       PRODUCTION: JSON.stringify(config.PRODUCTION),
     }),
-  ],
+  ]
 };
 
 export default webpackBase;

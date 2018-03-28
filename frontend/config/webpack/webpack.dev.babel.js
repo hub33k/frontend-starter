@@ -1,11 +1,13 @@
 import path from 'path';
-import webpack from 'webpack';
-import ExtractTextPlugin from 'extract-text-webpack-plugin';
-import CopyWebpackPlugin from 'copy-webpack-plugin';
-import webpackDev from './webpack.base.babel';
-import * as config from './../config';
 
-// This turns on the creation of map files, in addition to turning on sourcemaps in plugins, this MUST be specified
+import webpack from "webpack";
+import CopyWebpackPlugin from 'copy-webpack-plugin';
+import ExtractTextPlugin from 'extract-text-webpack-plugin';
+
+import webpackDev from './webpack.base.babel';
+import * as config from '../config';
+
+webpackDev.mode = 'development';
 webpackDev.devtool = 'source-map';
 
 // Rules
@@ -16,9 +18,6 @@ webpackDev.module.rules.push(
     use: [
       {
         loader: 'style-loader',
-        options: {
-          useable: true,
-        }
       },
       {
         loader: 'css-loader',
@@ -50,10 +49,10 @@ webpackDev.module.rules.push(
   },
 );
 
+
 // Plugins
 webpackDev.plugins.push(
   new ExtractTextPlugin('[name].css'),
-  // keeps hashes consistent between compilations
   new webpack.optimize.OccurrenceOrderPlugin(),
   new CopyWebpackPlugin([
     // copy images from src/images to dist/assets/images

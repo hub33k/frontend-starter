@@ -1,12 +1,15 @@
 import path from 'path';
+
 import webpack from 'webpack';
-import * as config from './../config';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
+
 import webpackProd from './webpack.base.babel';
+import * as config from '../config';
 
 const extractCSS = new ExtractTextPlugin('[name].[hash:10].css');
 
+webpackProd.mode = 'production';
 webpackProd.output.filename = '[name].[hash:10].js';
 
 webpackProd.module.rules.push(
@@ -56,12 +59,6 @@ webpackProd.plugins.push(
       'NODE_ENV': JSON.stringify('production'),
     },
   }),
-  // minifies your code
-  new webpack.optimize.UglifyJsPlugin({
-    compressor: {
-      warnings: false,
-    },
-  }),
   new CopyWebpackPlugin([
     // copy public folder to dist root
     {
@@ -84,5 +81,6 @@ webpackProd.plugins.push(
     },
   ]),
 );
+
 
 export default webpackProd;
