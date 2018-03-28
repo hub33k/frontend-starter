@@ -1,0 +1,10 @@
+// Variables from webpack
+$DEVELOPMENT: $DEVELOPMENT;
+$PRODUCTION: $PRODUCTION;
+
+// URLs
+$STATIC_URL: '/assets/';
+$FONTS_URL: '#{$STATIC_URL}fonts';
+$IMAGES_URL: '#{$STATIC_URL}images';
+
+$DEBUG: true;

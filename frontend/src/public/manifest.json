@@ -1,0 +1,20 @@
+{
+  "short_name": "FS",
+  "name": "Frontend starter",
+  "icons": [
+    {
+      "src": "",
+      "sizes": "144x144",
+      "type": "image/png"
+    },
+    {
+      "src": "",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/?utm_source=homescreen",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "display": "fullscreen"
+}

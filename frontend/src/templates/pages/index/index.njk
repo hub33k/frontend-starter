@@ -1,0 +1,10 @@
+{% extends 'base.njk' %}
+
+
+{% block title %}Home | {{ super() }}{% endblock %}
+
+{% block page_content %}
+  <h2>Hello</h2>
+  <img src="{{ STATIC_URL }}images/html5/HTML5_Logo.svg" alt="HTML5 logo" width="100px">
+  <div class="js-app"></div>
+{% endblock %}

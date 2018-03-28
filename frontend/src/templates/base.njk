@@ -1,0 +1,102 @@
+{% set vars = htmlWebpackPlugin.options.variables %}
+{% set global = vars.global %}
+
+{% set ROOT_URL = global.ROOT_URL %}
+{% set STATIC_URL = global.STATIC_URL %}
+{% set isDev = global.isDev %}
+{% set isProd = global.isProd %}
+
+<!doctype html>
+
+<!--
+Magic. Do not touch.
+If this comment is removed the website will blow up.
+-->
+
+<html lang="{% block lang %}en{% endblock %}" {% block extra_html %}{% endblock %} dir="ltr">
+<head>
+  <!-- Set character encoding for the document -->
+  <meta charset="utf-8">
+
+  <!-- Document Title (less than 55 chars) -->
+  <title>{% block title %}{{ global.title }}{% endblock %}</title>
+
+  <!-- Instruct Internet Explorer to use its latest rendering engine -->
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+  <!-- Viewport for responsive web design -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Meta Description (less than 150 characters) -->
+  <meta name="description" content="Description of the page less than 150 characters">
+
+  <!-- Standard favicon (.ico) -->
+  <link rel="icon" type="image/x-icon" href="data:image/x-icon;,">
+
+  <!-- Recommended favicon format (.png) -->
+  <link rel="icon" type="image/png" href="data:image/x-icon;,">
+
+  <!-- Apple Touch Icon (.png) -->
+  <link rel="apple-touch-icon" href="data:image/x-icon;,">
+
+  <!-- Microsoft Tiles -->
+  <meta name="msapplication-config" content="{{ ROOT_URL }}browserconfig.xml">
+
+  <link rel="manifest" href="{{ ROOT_URL }}manifest.json">
+
+  <meta name="theme-color" content="#ffffff">
+
+  <!-- Helps prevent duplicate content issues -->
+  <!-- <link rel="canonical" href="https://example.com"> -->
+
+  {# for prod load styles first #}
+  {% if isProd %}
+    {% for chunk in htmlWebpackPlugin.options.heads %}
+      {% if '_styles' in chunk %}
+        <link rel="stylesheet" href="{{ htmlWebpackPlugin.files.chunks[chunk].css }}">
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+
+  {# load scripts here #}
+  {% for chunk in htmlWebpackPlugin.options.heads %}
+    {% if isDev %}
+      {# development scripts #}
+      <script src="{{ htmlWebpackPlugin.files.chunks[chunk].entry }}"></script>
+    {% else %}
+      {% if '_styles' in chunk %}
+        {# do not add styles here; check above ^ #}
+      {% else %}
+        {# production scripts #}
+        <script src="{{ htmlWebpackPlugin.files.chunks[chunk].entry }}"></script>
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+
+  {% block extra_head %}{% endblock %}
+</head>
+<body class="{% block body_class %}{% endblock %}" {% block extra_body %}{% endblock %}>
+<!--[if lte IE 9]><p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p><![endif]-->
+
+<div class="{% block page_wrapper_class %}page-wrapper{% endblock %}">
+  {% block page_header %}
+    {% include 'layout/header.njk' %}
+  {% endblock %}
+
+  <main role="main">
+    {% block page_content %}{% endblock %}
+  </main>
+
+  {% block page_footer %}
+    {% include 'layout/footer.njk' %}
+  {% endblock %}
+</div>
+
+<!-- le scripts
+================================================================ -->
+{% for chunk in htmlWebpackPlugin.options.bodys %}
+  <script src="{{ htmlWebpackPlugin.files.chunks[chunk].entry }}" async></script>
+{% endfor %}
+{% block extra_scripts %}{% endblock %}
+</body>
+</html>
