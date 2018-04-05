@@ -50,7 +50,7 @@ If this comment is removed the website will blow up.
   <!-- <link rel="canonical" href="https://example.com"> -->
 
   {# for prod load styles first #}
-  {% if isProd %}
+  {% if global.isProd %}
     {% for chunk in htmlWebpackPlugin.options.heads %}
       {% if '_styles' in chunk %}
         <link rel="stylesheet" href="{{ htmlWebpackPlugin.files.chunks[chunk].css }}">
@@ -60,7 +60,7 @@ If this comment is removed the website will blow up.
 
   {# load scripts here #}
   {% for chunk in htmlWebpackPlugin.options.heads %}
-    {% if isDev %}
+    {% if global.isDev %}
       {# development scripts #}
       <script src="{{ htmlWebpackPlugin.files.chunks[chunk].entry }}"></script>
     {% else %}

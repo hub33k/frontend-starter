@@ -1,4 +1,11 @@
 /* debug.scss */
 
 @if $DEBUG {
+  @font-face {
+    font: {
+      family: 'Roboto';
+      weight: 400;
+    }
+    src: url('#{$FONTS_URL}/Roboto/Roboto-Regular.ttf') format('truetype');
+  }
 }

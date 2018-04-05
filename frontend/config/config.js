@@ -72,7 +72,7 @@ export const TEMPLATE_CONFIG = {
 
 // ================================
 // Styles config
-// TODO: check this https://github.com/planetflash/sharing_variables_js_sass
+// https://github.com/planetflash/sharing_variables_js_sass
 export const STYLES_CONFIG = {
   data: `$DEVELOPMENT: ${DEVELOPMENT}; $PRODUCTION: ${PRODUCTION}`,
 };

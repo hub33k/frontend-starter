@@ -1,11 +1,10 @@
-// https://webpack.js.org/configuration/dev-server/#devserver
-
 import webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
-import * as config from './../config';
-import webpackDev from './webpack.dev.babel';
 
-// Add hot module replacement scripts
+import webpackDev from './webpack.dev.babel';
+import * as config from '../config';
+
+// Add hot module replacement scripts to each entry js file
 const tempEntry = {};
 
 for (let key in webpackDev.entry) {
@@ -23,7 +22,7 @@ webpackDev.entry = tempEntry;
 
 webpackDev.plugins.push(
   new webpack.HotModuleReplacementPlugin(),
-  new webpack.NoEmitOnErrorsPlugin(), // don't reload if there is an error
+  new webpack.NoEmitOnErrorsPlugin(),
 );
 
 // Webpack dev server
