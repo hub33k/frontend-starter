@@ -9,7 +9,7 @@ export const PRODUCTION = process.env.NODE_ENV === 'production';
 
 export const STATIC_URL = '/';
 export const ASSETS_PATH = 'assets';
-export const PORT = 9000;
+export const PORT = 1337;
 
 // ================================
 // Dirs
