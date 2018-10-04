@@ -6,6 +6,7 @@ import CopyWebpackPlugin from 'copy-webpack-plugin';
 
 import webpackProd from './webpack.base.babel';
 import * as config from '../config';
+import paths from '../paths';
 
 const extractCSS = new ExtractTextPlugin('[name].[hash:10].css');
 
@@ -29,7 +30,7 @@ webpackProd.module.rules.push(
             options: {
               sourceMap: true,
               config: {
-                path: path.resolve(config.FRONTEND_DIR, 'config', 'postcss.config.js'),
+                path: path.resolve(paths.frontendPath, 'config', 'postcss.config.js'),
               }
             }
           },
@@ -40,7 +41,7 @@ webpackProd.module.rules.push(
               sourceMapContents: true,
               outputStyle: 'compressed', // nested, compact, expanded, compressed
               includePaths: [
-                path.resolve(config.BASE_DIR, 'node_modules'),
+                paths.appNodeModules,
               ],
               data: config.STYLES_CONFIG.data,
             },
@@ -62,22 +63,22 @@ webpackProd.plugins.push(
   new CopyWebpackPlugin([
     // copy public folder to dist root
     {
-      context: config.PUBLIC_DIR,
+      context: paths.appPublic,
       from: '**/*',
-      to: config.DIST_DIR,
+      to: paths.appBuild,
       dot: true,
     },
     // copy images from src/images to dist/assets/images
     {
-      context: config.IMAGES_DIR,
+      context: paths.imagesPath,
       from: '**/*.{gif,png,jpg,jpeg,svg}',
-      to: path.resolve(config.DIST_DIR, 'assets', 'images'),
+      to: path.resolve(paths.appBuild, 'assets', 'images'),
     },
     // copy fonts from src/fonts to dist/assets/fonts
     {
-      context: config.FONTS_DIR,
+      context: paths.fontsPath,
       from: '**/*.{eot,woff,woff2,ttf,svg}',
-      to: path.resolve(config.DIST_DIR, 'assets', 'fonts'),
+      to: path.resolve(paths.appBuild, 'assets', 'fonts'),
     },
   ]),
 );

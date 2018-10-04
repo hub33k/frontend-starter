@@ -3,6 +3,7 @@ import WebpackDevServer from 'webpack-dev-server';
 
 import webpackDev from './webpack.dev.babel';
 import * as config from '../config';
+import paths from '../paths';
 
 // Add hot module replacement scripts to each entry js file
 const tempEntry = {};
@@ -36,7 +37,7 @@ const server = new WebpackDevServer(compiler, {
     errors: true
   },
   historyApiFallback: true,
-  contentBase: [config.TMP_DIR], // webpackDev.context,
+  contentBase: [paths.appTmp], // webpackDev.context,
   filename: webpackDev.output.filename,
   publicPath: webpackDev.output.publicPath,
   stats: {

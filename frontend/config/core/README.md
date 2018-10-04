@@ -1,0 +1,1 @@
+# Frontend starter core module

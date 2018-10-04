@@ -1,8 +1,5 @@
-import path from 'path';
-
 // ================================================================
 // Variables
-
 export const APP_NAME = 'Frontend starter';
 export const DEVELOPMENT = process.env.NODE_ENV === 'development';
 export const PRODUCTION = process.env.NODE_ENV === 'production';
@@ -10,26 +7,6 @@ export const PRODUCTION = process.env.NODE_ENV === 'production';
 export const STATIC_URL = '/';
 export const ASSETS_PATH = 'assets';
 export const PORT = 1337;
-
-// ================================
-// Dirs
-export const BASE_DIR = path.resolve(__dirname, '..', '..');
-
-export const NODE_MODULES_DIR = path.resolve(BASE_DIR, 'node_modules');
-export const FRONTEND_DIR = path.resolve(BASE_DIR, 'frontend');
-export const BACKEND_DIR = path.resolve(BASE_DIR, 'backend');
-
-export const CONFIG_DIR = path.resolve(FRONTEND_DIR, 'config');
-export const TMP_DIR = path.resolve(FRONTEND_DIR, '.tmp');
-export const DIST_DIR = path.resolve(FRONTEND_DIR, 'dist');
-export const SRC_DIR = path.resolve(FRONTEND_DIR, 'src');
-
-export const PUBLIC_DIR = path.resolve(SRC_DIR, 'public');
-export const SCRIPTS_DIR = path.resolve(SRC_DIR, 'scripts');
-export const FONTS_DIR = path.resolve(SRC_DIR, 'fonts');
-export const STYLES_DIR = path.resolve(SRC_DIR, 'styles');
-export const IMAGES_DIR = path.resolve(SRC_DIR, 'images');
-export const TEMPLATES_DIR = path.resolve(SRC_DIR, 'templates');
 
 // ================================
 // Template config
@@ -46,10 +23,13 @@ export const TEMPLATE_CONFIG = {
   // ================
   // Variables used by webpack
   // Entries
+  // In <head>
   heads: [
+    'index',
     'init',
     'front_styles',
   ],
+  // Before </body>
   bodys: [
     'main',
   ],

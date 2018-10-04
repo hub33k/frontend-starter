@@ -1,0 +1,9 @@
+{
+  "lerna": "3.4.1",
+  "npmClient": "yarn",
+  "useWorkspaces": true,
+  "packages": [
+    "frontend/config/*"
+  ],
+  "version": "independent"
+}

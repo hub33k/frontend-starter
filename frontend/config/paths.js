@@ -6,6 +6,22 @@ import url from 'url';
 // https://github.com/facebook/create-react-app/issues/637
 const appDirectory = fs.realpathSync(process.cwd());
 const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
+const getPath = (baseDirectory = appDirectory, relativePath, ...params) => {
+  // Usage
+  // console.log(paths.getPath('niewiem.html'));
+  // console.log(paths.getPath('aaa', 'bbb', 'ccc'));
+  // console.log(paths.getPath(paths.appSrc, 'ddd', 'file.html'));
+
+  if (relativePath) {
+    // If there are two parameters or more
+    return path.resolve(baseDirectory, relativePath, ...params);
+  }
+
+  // If there is only one parameter
+  relativePath = baseDirectory;
+
+  return resolveApp(relativePath);
+};
 
 const envPublicUrl = process.env.PUBLIC_URL;
 
@@ -36,77 +52,51 @@ function getServedPath(appPackageJson) {
   return ensureSlash(servedUrl, true);
 }
 
-// config after eject: we're in ./config/
-export default {
-  dotenv: resolveApp('.env'),
+const paths = {
   appPath: resolveApp('.'),
-  appBuild: resolveApp('build'),
-  appPublic: resolveApp('public'),
-  appHtml: resolveApp('public/index.html'),
-  appIndexJs: resolveApp('src/index.js'),
-  appPackageJson: resolveApp('package.json'),
-  appSrc: resolveApp('src'),
-  yarnLockFile: resolveApp('yarn.lock'),
-  testsSetup: resolveApp('src/setupTests.js'),
-  proxySetup: resolveApp('src/setupProxy.js'),
+
+  frontendPath: resolveApp('frontend'),
+  backendPath: resolveApp('backend'),
+
   appNodeModules: resolveApp('node_modules'),
+
+  dotenv: resolveApp('.env'),
+
+  appPackageJson: resolveApp('package.json'),
+  yarnLockFile: resolveApp('yarn.lock'),
+
   publicUrl: getPublicUrl(resolveApp('package.json')),
   servedPath: getServedPath(resolveApp('package.json')),
+
+  // Functions
+  resolveApp: resolveApp,
+  ensureSlash: ensureSlash,
+  getPublicUrl: getPublicUrl,
+  getServedPath: getServedPath,
+  getPath: getPath,
 };
 
-// @remove-on-eject-begin
-const resolveOwn = relativePath => path.resolve(__dirname, '..', relativePath);
 
-// config before eject: we're in ./node_modules/react-scripts/config/
-module.exports = {
-  dotenv: resolveApp('.env'),
-  appPath: resolveApp('.'),
-  appBuild: resolveApp('build'),
-  appPublic: resolveApp('public'),
-  appHtml: resolveApp('public/index.html'),
-  appIndexJs: resolveApp('src/index.js'),
-  appPackageJson: resolveApp('package.json'),
-  appSrc: resolveApp('src'),
-  yarnLockFile: resolveApp('yarn.lock'),
-  testsSetup: resolveApp('src/setupTests.js'),
-  proxySetup: resolveApp('src/setupProxy.js'),
-  appNodeModules: resolveApp('node_modules'),
-  publicUrl: getPublicUrl(resolveApp('package.json')),
-  servedPath: getServedPath(resolveApp('package.json')),
-  // These properties only exist before ejecting:
-  ownPath: resolveOwn('.'),
-  ownNodeModules: resolveOwn('node_modules'), // This is empty on npm 3
-};
+paths.confgPath = path.resolve(paths.frontendPath, 'config');
 
-const ownPackageJson = require('../package.json');
-const reactScriptsPath = resolveApp(`node_modules/${ownPackageJson.name}`);
-const reactScriptsLinked =
-  fs.existsSync(reactScriptsPath) &&
-  fs.lstatSync(reactScriptsPath).isSymbolicLink();
+paths.appSrc = path.resolve(paths.frontendPath, 'src');
+paths.appBuild = path.resolve(paths.frontendPath, 'dist');
+paths.appTmp = path.resolve(paths.frontendPath, '.tmp');
 
-// config before publish: we're in ./packages/react-scripts/config/
-if (
-  !reactScriptsLinked &&
-  __dirname.indexOf(path.join('packages', 'react-scripts', 'config')) !== -1
-) {
-  module.exports = {
-    dotenv: resolveOwn('template/.env'),
-    appPath: resolveApp('.'),
-    appBuild: resolveOwn('../../build'),
-    appPublic: resolveOwn('template/public'),
-    appHtml: resolveOwn('template/public/index.html'),
-    appIndexJs: resolveOwn('template/src/index.js'),
-    appPackageJson: resolveOwn('package.json'),
-    appSrc: resolveOwn('template/src'),
-    yarnLockFile: resolveOwn('template/yarn.lock'),
-    testsSetup: resolveOwn('template/src/setupTests.js'),
-    proxySetup: resolveOwn('template/src/setupProxy.js'),
-    appNodeModules: resolveOwn('node_modules'),
-    publicUrl: getPublicUrl(resolveOwn('package.json')),
-    servedPath: getServedPath(resolveOwn('package.json')),
-    // These properties only exist before ejecting:
-    ownPath: resolveOwn('.'),
-    ownNodeModules: resolveOwn('node_modules'),
-  };
-}
-// @remove-on-eject-end
+// in src
+paths.dataPath = path.resolve(paths.appSrc, 'data');
+paths.appPublic = path.resolve(paths.appSrc, 'public');
+paths.scriptsPath = path.resolve(paths.appSrc, 'scripts');
+paths.imagesPath = path.resolve(paths.appSrc, 'images');
+paths.fontsPath = path.resolve(paths.appSrc, 'fonts');
+paths.stylesPath = path.resolve(paths.appSrc, 'styles');
+paths.templatesPath = path.resolve(paths.appSrc, 'templates');
+
+// Files
+paths.appHtml = path.resolve(paths.appPublic, 'index.html');
+paths.appIndexJs = path.resolve(paths.scriptsPath, 'index.js');
+paths.appIndexSass = path.resolve(paths.stylesPath, 'main.sass');
+paths.testsSetup = path.resolve(paths.scriptsPath, 'setupTests.js');
+paths.proxySetup = path.resolve(paths.scriptsPath, 'setupProxy.js');
+
+export default paths;

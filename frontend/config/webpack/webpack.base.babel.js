@@ -5,31 +5,38 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 import BundleTracker from 'webpack-bundle-tracker';
 
 import * as config from '../config';
+import paths from '../paths';
 
 // Base config
 const webpackBase = {
-  context: config.SRC_DIR,
+  context: paths.appSrc,
   resolve: {
     // allow `import` from dirs below
     modules: [
-      config.NODE_MODULES_DIR,
-      config.SRC_DIR,
+      paths.appNodeModules,
+      paths.appSrc,
     ],
     extensions: ['.js'],
   },
   entry: {
-    init: [
-      path.resolve(config.SCRIPTS_DIR, 'init.js'),
+    // TODO: move this section to config.js
+    // Scripts
+    index: [
+      path.resolve(paths.scriptsPath, 'index.js'),
     ],
-    front_styles: [
-      path.resolve(config.STYLES_DIR, 'main.sass'),
+    init: [
+      path.resolve(paths.scriptsPath, 'init.js'),
     ],
     main: [
-      path.resolve(config.SCRIPTS_DIR, 'main.js'),
+      path.resolve(paths.scriptsPath, 'main.js'),
+    ],
+    // Styles
+    front_styles: [
+      path.resolve(paths.stylesPath, 'main.sass'),
     ],
   },
   output: {
-    path: config.PRODUCTION ? path.resolve(config.DIST_DIR, config.ASSETS_PATH) : path.resolve(config.TMP_DIR, config.ASSETS_PATH),
+    path: config.PRODUCTION ? path.resolve(paths.appBuild, config.ASSETS_PATH) : path.resolve(paths.appTmp, config.ASSETS_PATH),
     publicPath: '/' + config.ASSETS_PATH,
     filename: '[name].js',
     // http://stackoverflow.com/questions/34357489/calling-webpacked-code-from-outside-html-script-tag
@@ -66,7 +73,7 @@ const webpackBase = {
             loader: 'nunjucks-isomorphic-loader',
             query: {
               root: [
-                config.TEMPLATES_DIR,
+                paths.templatesPath,
               ]
             }
           }
@@ -104,12 +111,13 @@ const webpackBase = {
       path: __dirname,
       filename: 'webpack-stats.json',
     }),
+    // TODO: move this section to config.js
     new HtmlWebpackPlugin({
       variables: {
         global: config.TEMPLATE_CONFIG.variables,
       },
 
-      template: path.resolve(config.TEMPLATES_DIR, 'pages', 'index', 'index.njk'),
+      template: path.resolve(paths.templatesPath, 'pages', 'index', 'index.njk'),
       filename: "../index.html", // output file to .tmp root (not .tmp/assets)
 
       // https://github.com/jantimon/html-webpack-plugin/issues/252
@@ -129,7 +137,7 @@ const webpackBase = {
         }
       },
 
-      template: path.resolve(config.TEMPLATES_DIR, 'pages', 'test', 'test.njk'),
+      template: path.resolve(paths.templatesPath, 'pages', 'test', 'test.njk'),
       filename: "../test/index.html", // output file to .tmp root (not .tmp/assets)
 
       // https://github.com/jantimon/html-webpack-plugin/issues/252

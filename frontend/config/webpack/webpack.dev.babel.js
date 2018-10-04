@@ -6,6 +6,7 @@ import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
 import webpackDev from './webpack.base.babel';
 import * as config from '../config';
+import paths from '../paths';
 
 webpackDev.mode = 'development';
 webpackDev.devtool = 'source-map';
@@ -30,7 +31,7 @@ webpackDev.module.rules.push(
         options: {
           sourceMap: true,
           config: {
-            path: path.resolve(config.FRONTEND_DIR, 'config', 'postcss.config.js'),
+            path: path.resolve(paths.frontendPath, 'config', 'postcss.config.js'),
           },
         },
       },
@@ -40,7 +41,7 @@ webpackDev.module.rules.push(
           sourceMap: true,
           outputStyle: 'nested', // nested, compact, expanded, compressed
           includePaths: [
-            path.resolve(config.BASE_DIR, 'node_modules'),
+            paths.appNodeModules,
           ],
           data: config.STYLES_CONFIG.data,
         },
@@ -57,15 +58,15 @@ webpackDev.plugins.push(
   new CopyWebpackPlugin([
     // copy images from src/images to dist/assets/images
     {
-      context: config.IMAGES_DIR,
+      context: paths.imagesPath,
       from: '**/*.{gif,png,jpg,jpeg,svg}',
-      to: path.resolve(config.TMP_DIR, 'assets', 'images'),
+      to: path.resolve(paths.appTmp, 'assets', 'images'),
     },
     // copy fonts from src/fonts to .tmp/assets/fonts
     {
-      context: config.FONTS_DIR,
+      context: paths.fontsPath,
       from: '**/*.{eot,woff,woff2,ttf,svg}',
-      to: path.resolve(config.TMP_DIR, 'assets', 'fonts'),
+      to: path.resolve(paths.appTmp, 'assets', 'fonts'),
     },
   ]),
 );
