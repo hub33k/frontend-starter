@@ -1,11 +1,13 @@
 import path from 'path';
 
-import webpack from "webpack";
+import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import BundleTracker from 'webpack-bundle-tracker';
 
-import * as config from '../config';
-import paths from '../paths';
+import core from '@hub33k/frontend-starter-core';
+
+const config = core.config;
+const paths = core.paths;
 
 // Base config
 const webpackBase = {
@@ -118,7 +120,7 @@ const webpackBase = {
       },
 
       template: path.resolve(paths.templatesPath, 'pages', 'index', 'index.njk'),
-      filename: "../index.html", // output file to .tmp root (not .tmp/assets)
+      filename: '../index.html', // output file to .tmp root (not .tmp/assets)
 
       // https://github.com/jantimon/html-webpack-plugin/issues/252
       // add one static to head and one to body
@@ -138,7 +140,7 @@ const webpackBase = {
       },
 
       template: path.resolve(paths.templatesPath, 'pages', 'test', 'test.njk'),
-      filename: "../test/index.html", // output file to .tmp root (not .tmp/assets)
+      filename: '../test/index.html', // output file to .tmp root (not .tmp/assets)
 
       // https://github.com/jantimon/html-webpack-plugin/issues/252
       inject: false,

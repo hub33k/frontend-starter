@@ -5,8 +5,10 @@ import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 
 import webpackProd from './webpack.base.babel';
-import * as config from '../config';
-import paths from '../paths';
+import core from '@hub33k/frontend-starter-core';
+
+const paths = core.paths;
+const config = core.config;
 
 const extractCSS = new ExtractTextPlugin('[name].[hash:10].css');
 

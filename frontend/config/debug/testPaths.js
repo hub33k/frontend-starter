@@ -3,7 +3,7 @@
  */
 
 import fs from 'fs';
-import paths from '../paths';
+import {paths} from '@hub33k/frontend-starter-core';
 
 export default function testPaths() {
   for (const p in paths) {

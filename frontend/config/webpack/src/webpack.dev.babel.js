@@ -1,12 +1,15 @@
 import path from 'path';
 
-import webpack from "webpack";
+import webpack from 'webpack';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
 import webpackDev from './webpack.base.babel';
-import * as config from '../config';
-import paths from '../paths';
+import core from '@hub33k/frontend-starter-core';
+
+const config = core.config;
+const paths = core.paths;
+const postcssConfig = core.postcssConfig;
 
 webpackDev.mode = 'development';
 webpackDev.devtool = 'source-map';
@@ -29,11 +32,8 @@ webpackDev.module.rules.push(
       {
         loader: 'postcss-loader',
         options: {
-          sourceMap: true,
-          config: {
-            path: path.resolve(paths.frontendPath, 'config', 'postcss.config.js'),
-          },
-        },
+          'autoprefixer': {},
+        }
       },
       {
         loader: 'sass-loader',

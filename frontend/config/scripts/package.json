@@ -1,14 +1,10 @@
 {
-  "name": "@hub33k/frontend-starter-core",
+  "name": "@hub33k/frontend-starter-scripts",
   "version": "0.0.0",
-  "main": "lib/index.js",
+  "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "build": "babel src --presets @babel/preset-env --out-dir lib"
   },
-  "files": [
-    "dist"
-  ],
   "devDependencies": {
     "@babel/cli": "^7.1.0",
     "@babel/core": "^7.1.0",

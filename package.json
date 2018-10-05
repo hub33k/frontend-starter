@@ -1,5 +1,5 @@
 {
-  "name": "frontend-starter",
+  "name": "@hub33k/frontend-starter",
   "version": "0.0.2",
   "description": "Best frontend starter kit in the world",
   "author": "hub33k <hub33k@internet.com>",
@@ -11,18 +11,20 @@
   "scripts": {
     "bootstrap": "lerna bootstrap",
     "clean": "lerna clean",
-    "webpack:server": "",
-    "dev": "NODE_ENV=development webpack --config ./frontend/config/webpack/webpack.dev.babel.js",
-    "server": "NODE_ENV=development babel-node ./frontend/config/webpack/webpack.dev-server.babel.js",
-    "debug:old": "lerna exec --scope debug -- yarn start",
-    "debug:start": "babel-node ./frontend/config/debug/index.js"
+    "rebuild": "yarn run clean && rm -rf node_modules && yarn run bootstrap",
+    "dev": "lerna exec --scope @hub33k/frontend-starter-webpack -- yarn run dev",
+    "server": "lerna exec --scope @hub33k/frontend-starter-webpack -- yarn run server",
+    "debug": "lerna exec --scope @hub33k/frontend-starter-debug -- yarn run start"
   },
   "devDependencies": {
     "@babel/cli": "^7.1.0",
     "@babel/core": "^7.1.0",
     "@babel/node": "^7.0.0",
     "@babel/preset-env": "^7.1.0",
+    "@babel/register": "^7.0.0",
     "gulp": "^4.0.0",
     "lerna": "^3.4.1"
+  },
+  "dependencies": {
   }
 }

@@ -2,8 +2,10 @@ import webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
 
 import webpackDev from './webpack.dev.babel';
-import * as config from '../config';
-import paths from '../paths';
+import core from '@hub33k/frontend-starter-core';
+
+const paths = core.paths;
+const config = core.config;
 
 // Add hot module replacement scripts to each entry js file
 const tempEntry = {};

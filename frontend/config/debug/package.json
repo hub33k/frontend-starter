@@ -4,8 +4,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "NODE_ENV=development babel-node ./index.js",
-    "start:anyVal": "NODE_ENV=development babel-node --ignore anyValue ./index.js"
+    "start": "babel-node --ignore anyValue index.js"
   },
   "main": "index.js",
   "devDependencies": {
@@ -14,6 +13,7 @@
     "@babel/node": "^7.0.0",
     "@babel/preset-env": "^7.1.0",
     "@hub33k/frontend-starter-core": "*",
+    "@hub33k/frontend-starter-tools": "*",
     "@hub33k/frontend-starter-utils": "*"
   }
 }

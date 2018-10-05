@@ -1,14 +1,19 @@
-module.exports = api => {
-  api.cache(false);
+module.exports = {
+  presets: [
+    [
+      '@babel/preset-env',
+      {
+        targets: {
+          node: 'current',
+        },
+      },
+    ],
+  ],
+  babelrcRoots: [
+    // Keep the root as a root
+    '.',
 
-  const presets = [
-    '@babel/preset-env',
-  ];
-
-  const plugins = [];
-
-  return {
-    presets,
-    plugins
-  };
+    // Also consider monorepo packages "root" and load their .babelrc files.
+    './frontend/config/*'
+  ],
 };

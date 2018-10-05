@@ -4,7 +4,11 @@ import url from 'url';
 
 // Make sure any symlinks in the project folder are resolved:
 // https://github.com/facebook/create-react-app/issues/637
-const appDirectory = fs.realpathSync(process.cwd());
+
+// https://stackoverflow.com/questions/12238477/determine-command-line-working-directory-when-running-node-bin-script
+const appDirectory = fs.realpathSync(process.env.INIT_CWD); // root root dir of project
+// const appDirectory = path.resolve(__dirname, '..', '..', '..', '..'); // root root dir of project
+const currentDirectory = fs.realpathSync(process.cwd()); // lerna/gulp can change CWD
 const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
 const getPath = (baseDirectory = appDirectory, relativePath, ...params) => {
   // Usage
@@ -54,6 +58,7 @@ function getServedPath(appPackageJson) {
 
 const paths = {
   appPath: resolveApp('.'),
+  currentDirectory: currentDirectory,
 
   frontendPath: resolveApp('frontend'),
   backendPath: resolveApp('backend'),

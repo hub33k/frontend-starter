@@ -5,16 +5,13 @@
   "license": "MIT",
   "scripts": {
     "preprod": "gulp clean:dist",
-    "prod": "NODE_ENV=production webpack --config ./webpack.prod.babel.js -p --progress --colors",
+    "prod": "NODE_ENV=production webpack  --config ./src/webpack.prod.babel.js -p --progress --colors",
     "predev": "gulp clean:tmp",
-    "dev": "NODE_ENV=development webpack --config ./webpack.dev.babel.js",
+    "dev": "webpack --config ./src/webpack.dev.babel.js",
     "gulp": "NODE_ENV=development gulp",
-    "server": "NODE_ENV=development babel-node ./webpack.dev-server.babel.js",
+    "server": "NODE_ENV=development babel-node --ignore anyValue ./src/webpack.dev-server.babel.js",
     "prewatch": "gulp clean:tmp",
-    "watch": "NODE_ENV=development webpack --watch --config ./webpack.dev.babel.js",
-    "start": "babel-node ./scripts/start.js",
-    "build": "babel-node ./scripts/build.js",
-    "test": "babel-node ./scripts/test.js"
+    "watch": "NODE_ENV=development webpack --watch --config ./src/webpack.dev.babel.js"
   },
   "dependencies": {
     "normalize.css": "^8.0.0"
@@ -24,6 +21,8 @@
     "@babel/core": "^7.1.0",
     "@babel/node": "^7.0.0",
     "@babel/preset-env": "^7.1.0",
+    "@babel/register": "^7.0.0",
+    "@hub33k/frontend-starter-core": "*",
     "autoprefixer": "^9.1.5",
     "babel-loader": "^8.0.2",
     "copy-webpack-plugin": "^4.5.1",

@@ -2,8 +2,10 @@ import path from 'path';
 import gulp from 'gulp';
 import del from 'del';
 
-import * as config from './frontend/config/config';
-import paths from './frontend/config/paths';
+import core from '@hub33k/frontend-starter-core';
+
+const config = core.config;
+const paths = core.paths;
 
 // Clean output directories
 gulp.task('clean:tmp', () => del([
