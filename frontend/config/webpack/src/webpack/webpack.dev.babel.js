@@ -5,11 +5,7 @@ import CopyWebpackPlugin from 'copy-webpack-plugin';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
 import webpackDev from './webpack.base.babel';
-import core from '@hub33k/frontend-starter-core';
-
-const config = core.config;
-const paths = core.paths;
-const postcssConfig = core.postcssConfig;
+import {paths, config} from '@hub33k/frontend-starter-core';
 
 webpackDev.mode = 'development';
 webpackDev.devtool = 'source-map';

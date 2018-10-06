@@ -1,17 +1,18 @@
 {
   "name": "@hub33k/frontend-starter-webpack",
   "version": "0.0.0",
-  "main": "index.js",
+  "main": "lib/index.js",
   "license": "MIT",
   "scripts": {
+    "compile": "babel -d lib/ src/",
     "preprod": "gulp clean:dist",
-    "prod": "NODE_ENV=production webpack  --config ./src/webpack.prod.babel.js -p --progress --colors",
-    "predev": "gulp clean:tmp",
-    "dev": "webpack --config ./src/webpack.dev.babel.js",
-    "gulp": "NODE_ENV=development gulp",
-    "server": "NODE_ENV=development babel-node --ignore anyValue ./src/webpack.dev-server.babel.js",
+    "prod": "webpack  --config ./lib/webpack/webpack.prod.babel.js -p --progress --colors",
+    "2predev": "gulp clean:tmp",
+    "dev": "webpack --config ./lib/webpack/webpack.dev.babel.js",
+    "gulp": "gulp",
+    "server": "babel-node --ignore anyValue ./src/webpack.dev-server.babel.js",
     "prewatch": "gulp clean:tmp",
-    "watch": "NODE_ENV=development webpack --watch --config ./src/webpack.dev.babel.js"
+    "watch": "webpack --watch --config ./src/webpack.dev.babel.js"
   },
   "dependencies": {
     "normalize.css": "^8.0.0"

@@ -1,9 +1,9 @@
-import paths from './paths';
-import * as config from './config';
-import env from './env';
-import * as postcssConfig from './postcss.config';
+import paths from './core/paths';
+import * as config from './core/config';
+import env from './core/env';
+import * as postcssConfig from './core/postcss.config';
 
-export default {
+export {
   paths,
   config,
   env,

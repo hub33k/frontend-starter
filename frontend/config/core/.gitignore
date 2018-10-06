@@ -6,6 +6,7 @@ webpack-stats.json
 ###########################################
 # Folders
 
+lib
 bower_components
 node_modules
 coverage

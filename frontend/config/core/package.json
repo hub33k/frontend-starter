@@ -4,11 +4,8 @@
   "main": "lib/index.js",
   "license": "MIT",
   "scripts": {
-    "build": "babel src --presets @babel/preset-env --out-dir lib"
+    "compile": "babel -d lib/ src/"
   },
-  "files": [
-    "dist"
-  ],
   "devDependencies": {
     "@babel/cli": "^7.1.0",
     "@babel/core": "^7.1.0",

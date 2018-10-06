@@ -4,10 +4,7 @@ import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import BundleTracker from 'webpack-bundle-tracker';
 
-import core from '@hub33k/frontend-starter-core';
-
-const config = core.config;
-const paths = core.paths;
+import {paths, config} from '@hub33k/frontend-starter-core';
 
 // Base config
 const webpackBase = {
