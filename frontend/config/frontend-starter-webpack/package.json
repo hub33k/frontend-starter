@@ -1,0 +1,12 @@
+{
+  "name": "@hub33k/frontend-starter-webpack",
+  "version": "1.0.0",
+  "license": "MIT",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node ."
+  },
+  "devDependencies": {
+    "@hub33k/frontend-starter-config": "*"
+  }
+}

@@ -1,1 +1,0 @@
-# Frontend starter webpack module
