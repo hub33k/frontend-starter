@@ -38,11 +38,13 @@ webpackProd.module.rules.push(
             options: {
               sourceMap: true,
               sourceMapContents: true,
-              outputStyle: 'compressed', // nested, compact, expanded, compressed
-              includePaths: [
-                path.resolve(config.BASE_DIR, 'node_modules'),
-              ],
-              data: config.STYLES_CONFIG.data,
+              sassOptions: {
+                outputStyle: 'compressed', // nested, compact, expanded, compressed
+                includePaths: [
+                  path.resolve(config.BASE_DIR, 'node_modules'),
+                ],
+              },
+              prependData: config.STYLES_CONFIG.data,
             },
           }],
       }
